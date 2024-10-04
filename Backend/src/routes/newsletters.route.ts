@@ -1,8 +1,13 @@
-import express from "express";
+import express from 'express';
 import * as NewsletterController from "../controllers/newsletters.controller";
 
 const router = express.Router();
-router.get("/" ,NewsletterController.getnewsletters);
-router.get("/:newsletterId",NewsletterController.getnewsletter);
- router.post("/", NewsletterController.creatNewsletters)
+router.post("/save",NewsletterController.saveNewsletter);
+router.get("/:newsLetterOwnerId",NewsletterController.getNewsletter);
+ router.put('/:newsletterId', NewsletterController.updateNewsletter );
+router.delete('/:newsletterId',NewsletterController.deleteNewsletter );
+router.get('/details', NewsletterController.getNewsletterDetails);
+router.post('/send-email', NewsletterController.sendNewsletterEmail);
 export default router;
+
+  

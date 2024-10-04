@@ -1,0 +1,869 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API Newsletters",
+    "version": "1.0.0",
+    "description": "Documentation de l'API pour gérer les blogs, utilisateurs, abonnés, commentaires et newsletters."
+  },
+  "paths": {
+
+    "/newsletters": {
+  "get": {
+    "summary": "Récupérer toutes les newsletters",
+    "tags": ["Newsletters"],
+    "responses": {
+      "200": {
+        "description": "La liste des newsletters",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/Newsletter"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "post": {
+    "summary": "Créer une nouvelle newsletter",
+    "tags": ["Newsletters"],
+    "requestBody": {
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/Newsletter"
+          }
+        }
+      }
+    },
+    "responses": {
+      "201": {
+        "description": "Newsletter créée avec succès",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Newsletter"
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Requête invalide"
+      }
+    }
+  }
+},
+"/newsletters/{id}": {
+  "get": {
+    "summary": "Récupérer une newsletter par ID",
+    "tags": ["Newsletters"],
+    "parameters": [
+      {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "Newsletter trouvée",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Newsletter"
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Newsletter non trouvée"
+      }
+    }
+  },
+  "put": {
+    "summary": "Mettre à jour une newsletter par ID",
+    "tags": ["Newsletters"],
+    "parameters": [
+      {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "requestBody": {
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/Newsletter"
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "Newsletter mise à jour avec succès",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Newsletter"
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Requête invalide"
+      },
+      "404": {
+        "description": "Newsletter non trouvée"
+      }
+    }
+  },
+  "delete": {
+    "summary": "Supprimer une newsletter par ID",
+    "tags": ["Newsletters"],
+    "parameters": [
+      {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "204": {
+        "description": "Newsletter supprimée avec succès"
+      },
+      "404": {
+        "description": "Newsletter non trouvée"
+      }
+    }
+  }
+}
+,"/blogs": {
+  "get": {
+    "summary": "Récupérer tous les blogs",
+    "tags": ["Blogs"],
+    "responses": {
+      "200": {
+        "description": "La liste des blogs",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/Blog"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "post": {
+    "summary": "Créer un nouveau blog",
+    "tags": ["Blogs"],
+    "requestBody": {
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/Blog"
+          }
+        }
+      }
+    },
+    "responses": {
+      "201": {
+        "description": "Blog créé avec succès",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Blog"
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Requête invalide"
+      }
+    }
+  }
+},
+"/blogs/{id}": {
+  "get": {
+    "summary": "Récupérer un blog par ID",
+    "tags": ["Blogs"],
+    "parameters": [
+      {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "Blog trouvé",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Blog"
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Blog non trouvé"
+      }
+    }
+  },
+  "put": {
+    "summary": "Mettre à jour un blog par ID",
+    "tags": ["Blogs"],
+    "parameters": [
+      {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "requestBody": {
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/Blog"
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "Blog mis à jour avec succès",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Blog"
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Requête invalide"
+      },
+      "404": {
+        "description": "Blog non trouvé"
+      }
+    }
+  },
+  "delete": {
+    "summary": "Supprimer un blog par ID",
+    "tags": ["Blogs"],
+    "parameters": [
+      {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "204": {
+        "description": "Blog supprimé avec succès"
+      },
+      "404": {
+        "description": "Blog non trouvé"
+      }
+    }
+  }
+},
+"/users": {
+  "get": {
+    "summary": "Récupérer tous les utilisateurs",
+    "tags": ["Users"],
+    "responses": {
+      "200": {
+        "description": "La liste des utilisateurs",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "post": {
+    "summary": "Créer un nouvel utilisateur",
+    "tags": ["Users"],
+    "requestBody": {
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/User"
+          }
+        }
+      }
+    },
+    "responses": {
+      "201": {
+        "description": "Utilisateur créé avec succès",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/User"
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Requête invalide"
+      }
+    }
+  }
+},
+"/users/{id}": {
+  "get": {
+    "summary": "Récupérer un utilisateur par ID",
+    "tags": ["Users"],
+    "parameters": [
+      {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "Utilisateur trouvé",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/User"
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Utilisateur non trouvé"
+      }
+    }
+  },
+  "put": {
+    "summary": "Mettre à jour un utilisateur par ID",
+    "tags": ["Users"],
+    "parameters": [
+      {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "requestBody": {
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/User"
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "Utilisateur mis à jour avec succès",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/User"
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Requête invalide"
+      },
+      "404": {
+        "description": "Utilisateur non trouvé"
+      }
+    }
+  },
+  "delete": {
+    "summary": "Supprimer un utilisateur par ID",
+    "tags": ["Users"],
+    "parameters": [
+      {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "204": {
+        "description": "Utilisateur supprimé avec succès"
+      },
+      "404": {
+        "description": "Utilisateur non trouvé"
+      }
+    }
+  }
+}
+,"/comments": {
+  "get": {
+    "summary": "Récupérer tous les commentaires",
+    "tags": ["Comments"],
+    "responses": {
+      "200": {
+        "description": "La liste des commentaires",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/Comment"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "post": {
+    "summary": "Créer un nouveau commentaire",
+    "tags": ["Comments"],
+    "requestBody": {
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/Comment"
+          }
+        }
+      }
+    },
+    "responses": {
+      "201": {
+        "description": "Commentaire créé avec succès",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Comment"
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Requête invalide"
+      }
+    }
+  }
+},
+"/comments/{id}": {
+  "get": {
+    "summary": "Récupérer un commentaire par ID",
+    "tags": ["Comments"],
+    "parameters": [
+      {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "Commentaire trouvé",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Comment"
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Commentaire non trouvé"
+      }
+    }
+  },
+  "put": {
+    "summary": "Mettre à jour un commentaire par ID",
+    "tags": ["Comments"],
+    "parameters": [
+      {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "requestBody": {
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/Comment"
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "Commentaire mis à jour avec succès",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Comment"
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Requête invalide"
+      },
+      "404": {
+        "description": "Commentaire non trouvé"
+      }
+    }
+  },
+  "delete": {
+    "summary": "Supprimer un commentaire par ID",
+    "tags": ["Comments"],
+    "parameters": [
+      {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "204": {
+        "description": "Commentaire supprimé avec succès"
+      },
+      "404": {
+        "description": "Commentaire non trouvé"
+      }
+    }
+  }
+}
+,
+
+    "/subscribers": {
+  "get": {
+    "summary": "Récupérer tous les abonnés",
+    "tags": ["Subscribers"],
+    "responses": {
+      "200": {
+        "description": "La liste des abonnés",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/Subscriber"
+              }
+            }
+          }
+        }
+      }
+    }
+    
+  },
+  "post": {
+    "summary": "Créer un nouvel abonné",
+    "tags": ["Subscribers"],
+    "requestBody": {
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/Subscriber"
+          }
+        }
+      }
+    },
+    "responses": {
+      "201": {
+        "description": "Abonné créé avec succès",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Subscriber"
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Requête invalide"
+      }
+    }
+  }
+},
+"/subscribers/{id}": {
+  "get": {
+    "summary": "Récupérer un abonné par ID",
+    "tags": ["Subscribers"],
+    "parameters": [
+      {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "Abonné trouvé",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Subscriber"
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Abonné non trouvé"
+      }
+    }
+  },
+  "put": {
+    "summary": "Mettre à jour un abonné par ID",
+    "tags": ["Subscribers"],
+    "parameters": [
+      {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "requestBody": {
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/Subscriber"
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "Abonné mis à jour avec succès",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Subscriber"
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Requête invalide"
+      },
+      "404": {
+        "description": "Abonné non trouvé"
+      }
+    }
+  },
+  "delete": {
+    "summary": "Supprimer un abonné par ID",
+    "tags": ["Subscribers"],
+    "parameters": [
+      {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "204": {
+        "description": "Abonné supprimé avec succès"
+      },
+      "404": {
+        "description": "Abonné non trouvé"
+      }
+    }
+  }
+}
+
+  },
+  "components": {
+    "schemas": {
+      "Blog": {
+        "type": "object",
+        "required": ["userId", "content", "title"],
+        "properties": {
+          "userId": {
+            "type": "string",
+            "description": "L'ID de l'utilisateur qui a créé le blog"
+          },
+          "content": {
+            "type": "string",
+            "description": "Contenu du blog"
+          },
+          "title": {
+            "type": "string",
+            "description": "Titre du blog"
+          },
+          "image": {
+            "type": "string",
+            "description": "URL de l'image associée au blog"
+          },
+          "category": {
+            "type": "string",
+            "description": "Catégorie du blog"
+          },
+          "slug": {
+            "type": "string",
+            "description": "Slug SEO du blog"
+          }
+        }
+      },
+      "User": {
+        "type": "object",
+        "required": ["username", "email", "password"],
+        "properties": {
+          "username": {
+            "type": "string",
+            "description": "Nom de l'utilisateur"
+          },
+          "email": {
+            "type": "string",
+            "description": "Email de l'utilisateur"
+          },
+          "password": {
+            "type": "string",
+            "description": "Mot de passe de l'utilisateur"
+          },
+          "profilePicture": {
+            "type": "string",
+            "description": "URL de l'image de profil de l'utilisateur"
+          }
+        }
+      },
+      "Subscriber": {
+        "type": "object",
+        "required": ["email", "newsLetterOwnerId", "status"],
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "Email de l'abonné"
+          },
+          "newsLetterOwnerId": {
+            "type": "string",
+            "description": "ID du propriétaire de la newsletter"
+          },
+          "source": {
+            "type": "string",
+            "description": "Source par laquelle l'abonné a été ajouté"
+          },
+          "status": {
+            "type": "string",
+            "description": "Statut de l'abonnement (actif, inactif, etc.)"
+          }
+        }
+      },
+      "Comment": {
+        "type": "object",
+        "required": ["userId", "content", "createdAt"],
+        "properties": {
+          "userId": {
+            "type": "string",
+            "description": "ID de l'utilisateur qui a posté le commentaire"
+          },
+          "content": {
+            "type": "string",
+            "description": "Contenu du commentaire"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date et heure de création du commentaire"
+          },
+          "postId": {
+            "type": "string",
+            "description": "ID du poste auquel le commentaire est associé"
+          }
+        }
+      },
+      "Newsletter": {
+        "type": "object",
+        "required": ["title", "content", "newsLetterOwnerId"],
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Titre de la newsletter"
+          },
+          "content": {
+            "type": "string",
+            "description": "Contenu de la newsletter"
+          },
+          "newsLetterOwnerId": {
+            "type": "string",
+            "description": "ID du propriétaire de la newsletter"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date et heure de création de la newsletter"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date et heure de la dernière mise à jour de la newsletter"
+          }
+        }
+      }
+    }
+  }
+}

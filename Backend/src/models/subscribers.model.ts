@@ -8,13 +8,14 @@ const subscriberSchema = new Schema({
     unique: true,
   
   },
+  newsLetterOwnerId: {
+    type: String,
+  },
   source: {
     type: String,
   },
   status: {
     type: String,
-    enum: ['subscribed', 'unsubscribed', 'pending'],
-    default: 'pending',
   },
 }, { timestamps: true });
 
