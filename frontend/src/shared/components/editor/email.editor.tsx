@@ -25,7 +25,7 @@ const Emaileditor: React.FC<EmaileditorProps> = ({ subjectTitle }) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        userEmail: ["sponsorship@MervePlatform.com"], 
+        userEmail: ["takallahmarwa@gmail.com"], 
         subject: subjectTitle,
         content: html,
       }),

@@ -1,193 +1,137 @@
 import { RequestHandler } from 'express';
-import Blog from '../models/blogs.model';
-
-/**
- * @swagger
- * tags:
- *   name: Blogs
- *   description: API pour la gestion des blogs
- */
+import Blog from '../models/blogs.model';  // Le modèle que tu as défini
 
 /**
  * @swagger
  * /blogs:
  *   get:
- *     summary: Récupérer tous les blogs
+ *     summary: Récupérer tous les articles de blog
  *     tags: [Blogs]
- *     responses:
- *       200:
- *         description: La liste des blogs
- *         content:
- *           application/json:
- *             schema:q
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/Blog'
  */
-export const getBlogs: RequestHandler = async (req, res, next) => {
-    try {
-        const blogs = await Blog.find().exec();
-        res.status(200).json(blogs);
-    } catch (error) {
-        next(error);
-    }
+export const getAllBlogs: RequestHandler = async (req, res, next) => {
+  try {
+    const blogs = await Blog.find();
+    res.status(200).json(blogs);
+  } catch (error) {
+    next(error);
+  }
+}; 
+
+/**
+ * @swagger
+ * /blogs:
+ *   post:
+ *     summary: Créer un nouvel article de blog
+ *     tags: [Blogs]
+ */
+export const createBlog: RequestHandler = async (req, res, next) => {
+  const { title, content, blogonwerId, image, category } = req.body;
+  try {
+    const newBlog = await Blog.create({ title, content, blogonwerId, image, category });
+    res.status(201).json(newBlog);
+  } catch (error) {
+
+    next(error);
+  }
 };
 
 /**
  * @swagger
  * /blogs/{id}:
  *   get:
- *     summary: Récupérer un blog par ID
+ *     summary: Récupérer un article de blog par ID
  *     tags: [Blogs]
- *     parameters:
- *       - in: path
- *         name: id
- *         schema:
- *           type: string
- *         required: true
- *         description: ID du blog
- *     responses:
- *       200:
- *         description: Le blog correspondant à l'ID
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Blog'
- *       404:
- *         description: Blog non trouvé
  */
-export const getBlog: RequestHandler = async (req, res, next) => {
-    const blogId = req.params.blogId;
-    try {
-        const blog = await Blog.findById(blogId).exec();
-        if (!blog) {
-            return res.status(404).json({ message: 'Blog not found' });
-        }
-        res.status(200).json(blog);
-    } catch (error) {
-        next(error);
-    }
-};
-
-/**
- * @swagger
- * /blogs:
- *   post:
- *     summary: Créer un nouveau blog
- *     tags: [Blogs]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/Blog'
- *     responses:
- *       201:
- *         description: Blog créé avec succès
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Blog'
- *       400:
- *         description: Requête invalide
- */
-export const createBlog: RequestHandler = async (req, res, next) => {
-    const { userId, content, title, image, category } = req.body;
-    try {
-        const newBlog = await Blog.create({
-            userId,
-            content,
-            title,
-            image,
-            category,
-        });
-        res.status(201).json(newBlog);
-    } catch (error) {
-        next(error);
-    }
+export const getBlogById: RequestHandler = async (req, res, next) => {
+  const blogonwerId = req.query;
+  try {
+    const blog = await Blog.findById(blogonwerId);
+    if (!blog) return res.status(404).json({ message: 'Blog non trouvé' });
+    res.status(200).json(blog);
+  } catch (error) {
+    next(error);
+  }
 };
 
 /**
  * @swagger
  * /blogs/{id}:
  *   put:
- *     summary: Mettre à jour un blog existant
+ *     summary: Mettre à jour un article de blog
  *     tags: [Blogs]
- *     parameters:
- *       - in: path
- *         name: id
- *         schema:
- *           type: string
- *         required: true
- *         description: ID du blog
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/Blog'
- *     responses:
- *       200:
- *         description: Blog mis à jour avec succès
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Blog'
- *       404:
- *         description: Blog non trouvé
- *       400:
- *         description: Requête invalide
  */
 export const updateBlog: RequestHandler = async (req, res, next) => {
-    const blogId = req.params.blogId;
-    const { userId, content, title, image, category } = req.body;
-    try {
-        const updatedBlog = await Blog.findByIdAndUpdate(
-            blogId,
-            { userId, content, title, image, category },
-            { new: true, runValidators: true }
-        ).exec();
-
-        if (!updatedBlog) {
-            return res.status(404).json({ message: 'Blog not found' });
-        }
-
-        res.status(200).json(updatedBlog);
-    } catch (error) {
-        next(error);
-    }
+   const BlogId = req.params.newsletterId;
+  const { title, content, blogonwerId, image, category } = req.body;
+  try {
+    const updatedBlog = await Blog.findByIdAndUpdate(BlogId , { title, content, blogonwerId, image, category }, { new: true });
+    if (!updatedBlog) return res.status(404).json({ message: 'Blog non trouvé' });
+    res.status(200).json(updatedBlog);
+  } catch (error) {
+    next(error);
+  }
 };
 
 /**
  * @swagger
  * /blogs/{id}:
  *   delete:
- *     summary: Supprimer un blog
+ *     summary: Supprimer un article de blog
  *     tags: [Blogs]
- *     parameters:
- *       - in: path
- *         name: id
- *         schema:
- *           type: string
- *         required: true
- *         description: ID du blog
- *     responses:
- *       200:
- *         description: Blog supprimé avec succès
- *       404:
- *         description: Blog non trouvé
  */
 export const deleteBlog: RequestHandler = async (req, res, next) => {
-    const blogId = req.params.blogId;
-    try {
-        const deletedBlog = await Blog.findByIdAndDelete(blogId).exec();
-
-        if (!deletedBlog) {
-            return res.status(404).json({ message: 'Blog not found' });
-        }
-
-        res.status(200).json({ message: 'Blog deleted successfully' });
-    } catch (error) {
-        next(error);
-    }
+  const BlogId = req.params.newsletterId;
+  try {
+    const deletedBlog = await Blog.findByIdAndDelete(BlogId).exec();
+    
+    if (!deletedBlog) return res.status(404).json({ message: 'Blog non trouvé' });
+    res.status(200).json({ message: 'Blog supprimé avec succès' });
+  } 
+  catch (error) {
+    next(error);
+  }
 };
+export const saveBlog: RequestHandler = async (req, res, next) => {
+  const { title, content, newsLetterOwnerId, image, category} = req.body;
+  try {
+      const existingBlog = await Blog.findOne({
+        title, content, newsLetterOwnerId, image, category
+      });
+
+      if (existingBlog) {
+          const updatedblog = await Blog.findByIdAndUpdate(
+            existingBlog._id,
+              { content,image,category },
+              { new: true }
+          );
+          return res.status(200).json({ message: 'blog mise à jour avec succès', updatedblog});
+      } else {
+          const newblog = await Blog.create({
+            title, content, newsLetterOwnerId, image, category
+          });
+          return res.status(201).json({ message: 'blog sauvegardée avec succès', newblog });
+      }
+  } catch (error) {
+      next(error);
+
+  }
+};
+export const getBlogDetails: RequestHandler = async (req, res, next) => {
+  const { title,   image,newsLetterOwnerId } = req.query;
+  try {
+      const foundBlog = await Blog.findOne({
+          title,
+          image,
+          newsLetterOwnerId,
+      });
+
+      if (!foundBlog) {
+          return res.status(404).json({ message: 'Newsletter non trouvée' });
+      }
+
+      res.status(200).json(foundBlog);
+  } catch (error) {
+      next(error);
+  }
+};
+

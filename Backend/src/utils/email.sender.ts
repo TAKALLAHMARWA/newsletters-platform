@@ -19,7 +19,7 @@ const transporter = nodemailer.createTransport({
 });
 
 // Adresse de l'expéditeur
-const adminMail = "support@Merveplatform.com";
+const adminMail = "takallahmarwa@gmail.com";
 
 // Fonction d'envoi de l'email
 export const sendEmail = async ({ userEmail, subject, content }: Props) => {

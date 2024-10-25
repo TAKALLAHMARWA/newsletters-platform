@@ -10,5 +10,4 @@ type Newsletter = InferSchemaType<typeof newslettersSchema>;
 
 const newsletter = models.Newsletters || model<Newsletter>("Newsletters", newslettersSchema);
 
-
 export default newsletter;

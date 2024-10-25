@@ -47,7 +47,7 @@ export const sideBarItems: DashboardSideBarTypes[] = [
   },
   {
     title: "Blog",
-    url: "/dashboard/Blog",
+    url: "/dashboard/blog",
     icon: ICONS.Blog,
   },
   {
@@ -57,17 +57,9 @@ export const sideBarItems: DashboardSideBarTypes[] = [
   },
   {
   title: "Add blog",
-    url: "/dashboard/Add",
+    url: "/dashboard/add",
     icon: ICONS.add,
-  },
-
-{
-  title: "Comments",
-    url: "/dashboard/Comments",
-    icon: ICONS.comment,
-  },
-
-  
+  },  
   {
     title: "Audience",
     url: "/dashboard/audience",
